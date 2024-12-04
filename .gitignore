@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db 
+
+*.po
+*.pot
