@@ -92,8 +92,18 @@ def translate_text(text, target_language="es", max_retries=3, api_key=None):
             response = client.chat.completions.create(
                 model="gemma2-9b-it",
                 messages=[
-                    {"role": "system", "content": f"You are a translation assistant. Provide ONLY the direct translation of the text to {target_language}. Do not add any explanations, notes, or alternative translations. Maintain the exact formatting of the original text."},
-                    {"role": "user", "content": text}
+                        {
+                            "role": "system", 
+                            "content": f"You are a translation assistant. Translate the text to {target_language} with these rules:\n"
+                                f"Provide ONLY the translation\n"
+                                f"No greetings, no questions, no explanations\n"
+                                f"No additional words or sentences before/after translation\n"
+                                f"Match the original text's exact formatting\n"
+                                f"No suggestions or alternatives\n"
+                                f"No confirmation questions\n"
+                                f"No 'Here's the translation' type phrases"
+                        },                    
+                        {"role": "user", "content": text}
                 ]
             )
             return response.choices[0].message.content.strip()
